@@ -1056,7 +1056,7 @@ void sysuser::execdump(char **array, int count)
    for (temp=serverinterface->rootuser;temp;temp=temp->next)
       if (temp->fd==num)
    {
-      int fd=open(array[1],O_WRONLY|O_CREAT|O_TRUNC);
+      int fd=open(array[1],O_WRONLY|O_CREAT|O_TRUNC, 0666);
       if (fd==-1)
       {
          uprintf("%s: %s\r\n", array[1], strerror(errno));
