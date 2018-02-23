@@ -1,0 +1,28 @@
+;ID Password Rating
+;
+;  1	Observer
+;  2	Student1
+;  3	Student2
+;  4	Student3
+;  5	Controller1
+;  6	Controller2
+;  7	Controller3
+;  8	Instructor1
+;  9	Instructor2
+; 10	Instructor3
+; 11	Supervisor
+; 12	Administrator
+;
+; <vid> <pwd> <adminrank>
+; adminrank : de 0 a 12 (0 account desactivé)
+; 
+111111 password 12
+222222 password 12
+333333 password 12
+444444 password 12
+555555 password 12
+666666 password 12
+777777 password 12
+888888 password 12
+999999 password 12
+122222 122222 12

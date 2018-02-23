@@ -1,0 +1,250 @@
+%topic global:MAIN
+FSD server version 1.0
+
+Try 'help <command>' to get help on a topic. A list of topics is available
+with the 'help topics' command.
+
+Commands available:
+
+%topic connect:CONNECT TO A SERVER
+Syntax:
+   connect [<server name> [<port>]]
+
+Will connect the local server to the specified server. Without arguments,
+the command will show the current connections. For every connection
+some information is shown:
+fd    : The file descriptor that can be used for "disconnect"
+Out-Q : The amount of bytes waiting to be sent on this connection.
+In-Q  : The amount of bytes waiting to be processed from this connection.
+Feed  : The throughput of this connection is bytes/second (last 10 min.).
+Peer  : The peer of this connection.
+
+%topic disconnect:DISCONNECT FROM A SERVER
+Syntax:
+   disconnect <descriptor>
+
+Will disconnect the indicated server connection. Use 'connect' to get a list
+of active server connections.
+
+%topic servers:SERVER OVERVIEW(1)
+Syntax:
+   servers [<name>]
+
+This command will show an overview of the servers in the network.
+When the optional <name>, is specified, only servers with <name> in their
+ident code or in their name will be shown.
+
+The following fields are shown:
+ID     : The server ID.
+Host   : The hostname of the server.
+Email  : The maintainer's email address.
+Fl     : The flags associated with the server. M = Metar capable server,
+         S = silent server, not for clients.
+Hops   : The amount of hops needed to reach the host.
+Lag    : The amount of seconds currently needed for a round trip.
+Name   : The description of a server.
+
+
+%topic servers2:SERVER OVERVIEW(2)
+Syntax:
+   servers2 [<name>]
+
+This command will show an overview of the servers in the network.
+When the optional <name>, is specified, only servers with <name> in their
+ident code or in their name will be shown.
+
+The following fields are shown:
+ID      : The server ID.
+Version : The server version.
+Email   : The maintainer's email address.
+Location: The location of the server
+
+
+%topic ping:PING A NETWORK SERVER
+Syntax:
+   ping <serverident>
+
+This command sends a PING request to the specified server. When this servers
+receives the ping, it will send it back to the originating host.
+When a reply has been received, the reply time will be shown.
+
+%topic route:SHOW ROUTING TABLES
+Syntax
+   route [<ident>]
+
+Will show the internal routing table to all servers, or only to the servers
+which have the <ident> in their ident.
+
+The routing table is configured automatically and does not need human
+intervention.
+
+%topic say:SEND A MESSAGE TO A CLIENT
+Syntax
+   say <destination> <message>
+
+This command sends a message to a client.
+<destination> can be either:
+- A broadcast address (* = all clients, *P = all pilots, *A = all ATC)
+- A callsign, like "KL348"
+- A frequency address, like "@11240"
+
+%topic clients:CLIENTS OVERVIEW
+Syntax
+   clients [<callsign>]
+
+This command will show a list of all clients matching the given callsign.
+If only one client matches the callsign, a detailed overview of this
+client is shown.
+
+%topic distance:CALCULATE DISTANCE
+Syntax
+   distance <client1> <client2>
+
+This command can be used to calculate the distance between two clients.
+It only works if both client have reported their positions. The distance
+will be shown in Nautical Miles.
+
+%topic cert:CERTIFICATE CONTROL
+Syntax:
+   cert
+   cert add <type> <cid> <password> <maxlevel>
+   cert delete <type> <cid>
+   cert modify <type> <cid> <maxlevel>
+
+This command will add/delete or modify the certificate <cid> in the network.
+<type> can either be 'P' for a Pilot certificate or 'A' for an ATC certificate.
+The maximum level of this certificate is <level>.
+<level> can be one of:
+
+     Observer              Instructor1
+     Student1              Instructor2
+     Student2              Instructor3
+     Student3              Supervisor
+     Controller1           Administrator
+     Controller2
+     Controller3
+
+%topic cert:SHOW CERTIFICATES
+Syntax:
+   cert [<cid>]
+
+This command will show an overview of the current certificates. If <cid>
+is specified, only certificates which have <cid> in their code will be
+shown.
+
+%topic time:SHOW CURRENT TIME
+Syntax:
+   time
+
+This command gives the current time. The local time will be shown, as well
+as the UTC time.
+
+%topic range:SHOW COM RANGE
+Syntax:
+   range <callsign>
+
+This command shows the communication range of the client with <callsign>
+in NM.
+
+%topic weather:SEND WEATHER REQUEST
+Syntax:
+   weather <weather profile>
+
+This command will send out a weather request to the nearest METAR capable
+server. If no such server exists in the network, the command will fail.
+<weather profile> is the name of the requested weather profile. Usually
+this is an ICAO station code like KJFK, but it can also be a hand made
+profile.
+
+Note that because the server has to send out a request, the prompt will
+be returned immediately. When a response has been received, it will be
+displayed.
+
+%topic metar:SEND METAR REQUEST
+Syntax:
+   metar <weather profile>
+
+This command will send out a weather request to the nearest METAR capable
+server. If no such server exists in the network, the command will fail.
+<weather profile> is the name of the requested weather profile. Usually
+this is an ICAO station code like KJFK, but it can also be a hand made
+profile.
+
+Note that because the server has to send out a request, the prompt will
+be returned immediately. When a response has been received, it will be
+displayed.
+
+
+%topic log:ACCESS SYSTEM LOGS
+Syntax:
+   log (show|delete) <maxlevel> [<amount>]
+
+This command will show or delete log messages. If <amount> is specified,
+only <amount> messages will be shown/deleted.
+
+The importance of the log messages can be specified with the <maxlevel>
+option. <maxlevel> can be one if:
+
+0  Critical messages       3  Warning messages
+1  Alert messages          4  Info messages
+2  Error messages          5  Debug messages
+
+
+%topic stat:SHOW SERVER STATISTICS
+Syntax:
+   stat [<text>]
+
+This command will show the server statistical entries. When <text> is
+specified, only the entries with <text> in their name will be shown.
+
+%topic wall:BROADCAST MESSAGE
+Syntax:
+   wall <text>
+
+This command will send the text <text> to all clients connected to the
+local server.
+
+
+%topic delguard:DELETE GUARD CONNECTIONS
+Syntax:
+   delguard
+
+This command will delete all guard connections (pending connections).
+
+
+%topic wp:CONTROL WEATHER PROFILES
+Syntax:
+   wp show [<name>]
+   wp create <name>
+   wp delete <name>
+   wp activate <name>
+   wp set <name> <parameter>=<value>
+
+Examples:
+   wp create eham
+   wp set eham visibility 6
+   wp set eham pressure 2110
+   wp set eham clouds.1.floor 5000
+   wp set eham clouds.1.ceiling 9000
+   wp set eham clouds.1.coverage 6
+   wp set eham winds.1.floor 0
+   wp set eham winds.1.ceiling 250
+   wp set eham winds.1.speed 11
+   wp set eham winds.1.direction 240
+   wp set eham temperature.1.temperature 12
+   wp activate eham
+
+%topic pos:SET LOCAL POSITION
+Syntax:
+   pos <latitude> <longitude>
+
+This command is used to set the local position for the weather system.
+The command 'weather' uses this position to calculate the upper winds.
+
+%topic refreshmetar:DOWNLOAD LATEST METAR
+Syntax:
+   refreshmetar
+
+This command downloads the latest weather reports and places these in the
+file 'metar.txt'. This command is not available if the metar source was set
+to 'network'.

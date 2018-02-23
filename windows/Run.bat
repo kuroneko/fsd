@@ -1,0 +1,2 @@
+fsd /RUN
+pause

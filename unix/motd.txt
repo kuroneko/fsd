@@ -1,0 +1,6 @@
+Welcome to the FSD server for Unix.
+This Unix version has a united source code with the Windows version
+This Unix version is now able to generate whazzup file for servinfo
+
+Enjoy
+The FSFDT Team

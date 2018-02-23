@@ -1,0 +1,13 @@
+Welcome to the first native FSD server for Windows.
+All config files and logs are in Windows text format.
+This fsd server can run as NT service, meaning it can
+run on a PC even if no user is logged.
+Additionally, network efficiency has been greatly
+improved and can support up to 1024 users.
+In futur, this FSD will include a embedded webserver to
+provide native ServInfo service, a new weather engine,
+and reporting in ODBC.
+
+
+Enjoy
+The FSFDT Team

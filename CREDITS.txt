@@ -1,0 +1,21 @@
+Thanks to all the people who have helped me getting this server to what it is
+now. I couldn't have done it without these people:
+
+Greg Ament
+John Eisenhour
+Jason Grooms
+Joe Jurecka
+David Kings
+Mladen Kmetic
+Lyndon Nerenberg
+
+And ofcourse:
+
+All server operators
+All people who sent me bug reports
+All members of the SB/PC beta mailing list
+All members of the FSFAN team Dordrecht
+
+
+Marty Bochane
+

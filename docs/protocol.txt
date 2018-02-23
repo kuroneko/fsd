@@ -1,0 +1,256 @@
+This document describes the protocols used in the FSD server system.
+This document might not be up to date. It will be updated later.
+
+Introduction
+=============================================================================
+Servers can connect to other servers to form a network. The topology of this
+network is not important for the behavior of the protocol. Unlike the IRC
+server protocol, the topology is not restricted to a spanning tree; in fact
+it is even recommended to add "redundant" links, to increase performance and
+reduce the affect of a server crash.
+
+
+General packet format
+=============================================================================
+A packet consist of a certain amount of fields. Packets are terminated by a
+carriage return, line feed pair (\r\n). A semicolon (:) is used as the field
+separator. Every packet can be broken down into 6 basic fields. These are:
+
+   command name: The name of the command
+   destination : A code representing the destination for this packet.
+                 There are 6 possible types of destinations:
+                 '*'        : all servers, all clients
+                 '*A'       : all servers, ATC clients
+                 '*P'       : all servers, Pilot clients
+                 '<server>' : deliver only to server with server id <server>
+                 '%<pilot>' : deliver only to pilot with code <pilot>
+                 '@<freq>'  : deliver only to frequency <freq>
+    source     : The source of this packet. This source must always be a valid
+                 server name of the server that created the packet.
+    packetnr   : A number, representing the state of the packetcounter in the
+                 server that sent the packet. Because this counter remains
+                 the same when the packet is in transit, a server can decide
+                 instantaneously if it saw this packet earlier. Just before
+                 the number, a 'B' or a 'U' is put to indicate if this packet
+                 has been broadcast somewhere (B) or is a unicast packet. This
+                 is used to see if this is the only occurrance of this packet in
+                 the network.
+    hopcount   : The number of hops this packet made.
+    data       : Possible data
+
+The packet looks like this:
+
+<command name>:<destination>:<source>:<packetnr>:<hopcount>:<data.....>
+
+
+Routing
+==============================================================================
+When a server receives a packet, it should decide whether or not the packet
+should be forwarded, and if so, what the best route would be. By looking at
+the source, the server knows who sent the packet. For every server in the
+internal database, the corresponding packet counter is stored. By comparing
+this packet counter with the counter in the packet, the server can decide
+if it is a new or an old packet. This mechanism prevents servers from handling
+packets more than once. Caution should be takes when routing unicast packets.
+In some occasions, a broadcast packet might have arrived earlier (via a
+different route) than a unicast packet. Therefore, when the unicast packet
+arrives, the packet counter could be higher. This is called an overrun. To
+prevent this situation from happening, when a unicast packet is received
+(there is a U in the packet count field), it should always be delivered.
+
+
+Every server has an internal routing table. For every other server in the
+network, the hop for the shortest path is stored. This routing table uses
+the server ident code as the identification for the server. This means that
+no routing can take place to a certain server, when it has not first identified
+itself.
+
+When a server receives a packet, the route to the originating server is
+set to the direction which the packet came from. When a packet is received
+with an older packetcount, and the hopcount is smaller than the earlier packet,
+the path is adjusted. In order to keep to routing tables up to date, SYNC
+packets are used, which do not require a reply. Every server simply broadcasts
+these SYNC packets now and then. Because of the nature of a broadcast, the SYNC
+packet will travel through all new server connections, effectively updating
+the links to the originating server while it passes the servers in the network.
+
+
+General behavior
+==============================================================================
+Upon startup, a server will first make contact with the configured servers.
+After doing this, it will start a 'feed' on the active server links.
+In this feed, it will pump a list of all clients. servers and certificates
+through the link to its peer. The other server will do the same.
+
+Every minute, a SYNC packet is broadcast to keep the routing tables
+in shape. When a server connections drops, the server will broadcast a LINKDOWN
+packet to all other links. In this LINKDOWN packet it will put the ident codes
+of the servers that were routed through this link. When a server receives a
+LINKDOWN packet it checks the servers in the LINKDOWN packet. If the server
+routed packets to a server in the LINKDOWN packet through the link where the
+LINKDOWN packet came from it will reset the route to this server to NULL,
+which means 'broadcast'.
+
+
+Packets
+==============================================================================
+Here's a description of the packets, used in the server protocol. All packets
+have to conform to the general packet format, describes earlier. The general
+fields in the packets are left out here. They should be placed directly behind
+the command name. Once a packet is received, it may be forwarded, depending on
+the destination. The 'When received' part of the description only applies if
+the packet needs to be delivered locally (it is either a broadcast or it was
+sent to the server directly).
+
+
+
+   NOTIFY :
+      'NOTIFY:<feedflag>:<ident>:<name>:<email>:<hostname>:<version>:<flags>:
+         <location>'
+      Used to send information about a server through the network.
+   When received:
+      The receiving server should check if the source is known. If it isn't,
+      a new server entry should be generated. Otherwise, the information about
+      the server is updated.
+  
+   SYNC:
+      'SYNC:'
+      This is just a synchronization packet, to keep the routing tables
+      in shape.
+   When received:
+      This packet can be ignored.
+
+   LINKDOWN:
+      'LINKDOWN:<server>[:<server>......]'
+      This packet indicates that a link is down somewhere. The sending server
+      concatenates all server idents of the servers which have their shortest
+      hop pointing to the link that went down.
+   When received:
+      The server should check all server idents. When the shortest hop is
+      pointing to the direction this packet came from, the shortest hop should
+      be restored to NULL, forcing broadcasts to this server.
+
+   PING:
+      'PING:<data>'
+      This is a standard PING packet, which indicates that a server wants to
+      check who is alive.
+   When received:
+      The server should send back a PONG packet and echo the data.
+
+   PONG:
+      'PONG:<data>'
+      This packet indicates a response from a PING server.
+   When received:
+      The server knows the origin is alive.
+
+   ADDCLIENT:
+      'ADDCLIENT:<clientID>:<server>:<callsign>:<type>:<rating>:<prot revision>:
+         <realname>'
+   When received:
+      The server should add a new client to its internal database.
+
+   RMCLIENT:
+      'RMCLIENT:<callsign>'
+   When received:
+      The server should remove the client from its internal database.
+  
+   CERT:
+      'CERT:<cmd>:<cid>:<pwd>:<rating>:<GMT creation time>:<origin server ID>'
+   When received:
+      Where cmd=0:add, 1:delete, 2:modify
+      The server should add/delete/modify the cert entry in its internal
+      database.
+
+   MC:
+      'MC:<cmdnum>:<from>:<data>'
+      This is a standard multicast packet that carries a client command,
+      that should be delivered to a unicast or a multicast address.
+      The message <cmdnum> is delivered with the <from> and <data> to
+      the addressed clients.
+   When received:
+      The server should pass the indicated packet to the addressed clients.
+
+   REQMETAR:
+      'REQMETAR:<client id>:<metar ICAO code>:<parsed flag>:<fd>'
+      This packet is used to request weather to a server. The parsed flag
+      indicates if a raw metar packet(METAR) (parsed=0) is required, or a parsed
+      packet (WX) (parsed=1). The fd is used to indicate the file
+      descriptor of the user on the system port, or -1 if the user is a normal
+      client. This is nessecary because users on the system port have no
+      client id, and therefore cannot be addressed.
+   When received:
+      The server should either forward the packet to a METAR capable host,
+      or process the packet and send back a WX, METAR or NOWX packet.
+
+   WX:
+      'WX:<profilename>:<fd>:<barometer>:<visibility>:<clouds>:<thunder storms>:
+         <winds>:<temps>'
+      This packet is used to send parsed METAR data after a REQMETAR request.
+  When received:
+      The data should be passed to the client who send the request.
+
+   METAR:
+      'METAR:<station>:<fd>:<data>'
+      This packet is used to send raw METAR data after a REQMETAR request.
+  When received:
+      The data should be passed to the client who send the request.
+
+   NOWX:
+      'NOWX:<station>:<fd>'
+      This packet is used to indicate that no weather is available for the
+      requested station.
+  When received:
+      The message should be passed to the client who send the request.
+
+   PD (pilotdata):
+      'PD:<identflag>:<callsign>:<transponder>:<rating>:<lat>:<lon>:<alt>:
+         <groundspeed>'
+      This packet is used to send information about a pilot. It is received
+      from the pilot clients and broadcast through the network.
+   When received:
+      The server should check which clients should need this information
+      (which clients are close to the sending client), and relay the
+      information to them.
+  
+   AD (atcdata):
+      'AD:<callsign>:<frequency>:<facilitytype>:<visual range>:<rating>:<lat>:
+         <lon>:<alt>'
+      This packet is used to send information about an atc user. It is received
+      from the atc clients and broadcast through the network.
+   When received:
+      The server should check which clients should need this information
+      (which clients are close to the sending client), and relay the
+      information to them.
+
+
+   PLAN:
+      'PLAN:<callsign>:<revision>:<type>:<aircraft>:<tascruise>:<depairport>:
+         <deptime>:<actdeptime>:<alt>:<destairport>:<hrsenroute>:
+         <minenroute>:<hrsfuel>:<minfuel>:<altairport>:<remarks>:<route>;
+      This packet carries a pilot's flightplan.
+   When received:
+      This server should update the flightplan in its internal client database.
+
+   AWPROF:
+      'AWPROF:<station>:<version>:<origin>:<weather data>;
+      This packet is used to create a new weather profile. The server should
+      broadcast this packet to let all METAR hosts know, that the weather for
+      this station has changed.
+   When received:
+      METAR servers should store the indicated wheather and send it instead
+      when wheater requests are received.
+
+   DWPROF:
+      'DWPROF:<station>'
+      This packet indicated that override wheather should no longer be used
+      for this station.
+   When received:
+      The server should send real METAR wheater again when this station is
+      requested.
+
+   KILL:
+      'KILL:<callsign>:<reason>'
+      This packet is used to indicate that a client connection should be
+      terminated.
+   When received:
+      The server should close the indicated connection, if present.
