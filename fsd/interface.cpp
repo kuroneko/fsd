@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifdef WIN32
 	#include <winsock2.h>
 #else
@@ -10,18 +10,19 @@
 	#include <netinet/tcp.h>
 	#include <netdb.h>
 #endif
-#include <time.h>
-#include <ctype.h>
+#include <ctime>
+#include <cctype>
 #include <fcntl.h>
-#include <stdarg.h>
-#include <string.h>
-#include <errno.h>
+#include <cstdarg>
+#include <cstring>
+#include <cerrno>
+
 #include "interface.h"
 #include "global.h"
 #include "support.h"
 #include "user.h"
 
-char *killreasons[]=
+const char *killreasons[]=
 {
    "",
    "closed on command",

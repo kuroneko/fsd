@@ -1,14 +1,15 @@
-#include <stdio.h>
-#include <errno.h>
+#include <cstdio>
+#include <cerrno>
 #include <fcntl.h>
-#include <stdlib.h>
+#include <cstdlib>
 #ifndef WIN32
 	#include <unistd.h>
 #else
 	#include <io.h>
 #endif
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
+
 #include "global.h"
 #include "sysuser.h"
 #include "wprofile.h"
@@ -24,7 +25,7 @@
 #include "config.h"
 #include "fsdpaths.h"
 
-char *syscmds[]=
+const char *syscmds[]=
 {
    "servers",
    "info",
@@ -97,7 +98,7 @@ sysuser::sysuser(int fd, sysinterface *p, char *pn, int portnum, int g):
    memset(logs,0,sizeof(int)*L_MAX);
    for (x=0;x<MAXLOG;x++) if (loghistory[x].msg)
       logs[loghistory[x].level]++;
-   uprintf("# "PRODUCT" system interface ready.\r\n");
+   uprintf("# " PRODUCT " system interface ready.\r\n");
    uprintf("# Logs: Emerg: %d, Alert: %d, Crit: %d, Err: %d, Warn: %d, Info:"\
       " %d, Debug: %d\r\n", logs[0], logs[1], logs[2], logs[3], logs[4],
       logs[5], logs[6]);

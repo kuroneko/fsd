@@ -1,9 +1,10 @@
-#ifndef CLUSERHH
-#define CLUSERHH
 #include "interface.h"
 #include "clinterface.h"
 #include "user.h"
 #include "client.h"
+
+#ifndef CLUSERHH
+#define CLUSERHH
 
 class cluser : public absuser
 {

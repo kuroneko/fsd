@@ -1,8 +1,8 @@
+#include <ctime>
+#include "process.h"
+
 #ifndef CONFIGHH
 #define CONFIGHH
-
-#include <time.h>
-#include "process.h"
 
 #define CONFIGINTERVAL 10
 

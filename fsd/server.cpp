@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
 #include "server.h"
 #include "support.h"
 #include "client.h"

@@ -1,11 +1,13 @@
-#ifndef SERVINTERFACEHH
-#define SERVINTERFACEHH
-#include <time.h>
+#include <ctime>
 #include "interface.h"
 #include "user.h"
 #include "client.h"
 #include "certificate.h"
 #include "wprofile.h"
+
+#ifndef SERVINTERFACEHH
+#define SERVINTERFACEHH
+
 class servinterface:public tcpinterface
 {
    int packetcount, varmcdrops, varinterr;

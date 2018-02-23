@@ -1,11 +1,11 @@
-#ifndef INTERFACEHH
-#define INTERFACEHH
-#include <time.h>
+#include <ctime>
 #include <sys/types.h>
-//#include <time.h>
-//#include <unistd.h>
+
 #include "user.h"
 #include "process.h"
+
+#ifndef INTERFACEHH
+#define INTERFACEHH
 
 struct allowstruct
 {
@@ -20,7 +20,7 @@ struct guardstruct
    int port;
 };
 
-extern char *killreasons[];
+extern const char *killreasons[];
 
 #define KILL_NONE 0
 #define KILL_COMMAND 1

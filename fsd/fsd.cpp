@@ -1,11 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
 #ifndef WIN32
 	#include <unistd.h>
 #endif
 #include <sys/stat.h>
+
 #include "fsd.h"
 #include "manage.h"
 #include "support.h"

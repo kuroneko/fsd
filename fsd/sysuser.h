@@ -1,9 +1,10 @@
-#ifndef SYSUSERHH
-#define SYSUSERHH
 #include "interface.h"
 #include "sysinterface.h"
 #include "user.h"
 #include "wprofile.h"
+
+#ifndef SYSUSERHH
+#define SYSUSERHH
 
 #define SYS_SERVERS   0
 #define SYS_INFORMATION  1

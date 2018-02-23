@@ -1,10 +1,13 @@
-#ifndef SERVUSERHH
-#define SERVUSERHH
 #include "interface.h"
 #include "servinterface.h"
+
+#ifndef SERVUSERHH
+#define SERVUSERHH
+
 extern char *errors[100];
 extern int nerrors;
 extern int silentok[];
+
 class servuser : public absuser
 {
    servinterface *parent;

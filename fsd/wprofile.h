@@ -1,10 +1,11 @@
-#ifndef WPROFILEHH
-#define WPROFILEHH
+#include <ctime>
 
-#include <time.h>
 #include "interface.h"
 #include "server.h"
 #include "client.h"
+
+#ifndef WPROFILEHH
+#define WPROFILEHH
 
 struct cloudlayer
 {

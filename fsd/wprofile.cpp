@@ -1,15 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cmath>
+
 #include "wprofile.h"
 #include "support.h"
 #include "global.h"
 #include "mm.h"
 #include "client.h"
-
-
 
 wprofile *rootprofile=NULL;
 

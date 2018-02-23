@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(fsd
-        VERSION 2.99.0
+        VERSION 3.99.0
         LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 14)
 
 add_executable(fsd
         fsd/attributes.h
@@ -49,3 +47,5 @@ add_executable(fsd
         fsd/user.h
         fsd/wprofile.cpp
         fsd/wprofile.h)
+set_property(TARGET fsd PROPERTY CXX_STANDARD 14)
+set_property(TARGET fsd PROPERTY CXX_STANDARD_REQUIRED ON)

@@ -1,8 +1,9 @@
+#include <ctime>
+
+#include "interface.h"
+
 #ifndef CERTIFICATEHH
 #define CERTIFICATEHH
-
-#include <time.h>
-#include "interface.h"
 
 #define CERTPILOT   1
 #define CERTATC     2
@@ -18,7 +19,7 @@ class certificate
    void configure(char *, int, time_t, char *);
    ~certificate();
 };
-extern char *certlevels[];
+extern const char *certlevels[];
 int maxlevel(char *, char *, int *);
 certificate *getcert(char *name);
 extern certificate *rootcert;

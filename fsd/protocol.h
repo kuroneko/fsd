@@ -72,8 +72,8 @@
 #define ERR_SERVFULL   12        /* No more clients */
 #define ERR_CSSUSPEND  13        /* CID/PID suspended */
 
-extern char *cmdnames[];
-extern char *clcmdnames[];
-extern char *errstr[];
+extern const char *cmdnames[];
+extern const char *clcmdnames[];
+extern const char *errstr[];
 
 #endif

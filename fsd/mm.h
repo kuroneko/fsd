@@ -1,15 +1,16 @@
-#ifndef mmhh
-#define mmhh
-
-#include <stdio.h>
-#include <time.h>
+#include <cstdio>
+#include <ctime>
 #ifndef WIN32
-	#include <sys/time.h>
-	#include <sys/types.h>
-	#include <unistd.h>
+  #include <sys/time.h>
+  #include <sys/types.h>
+  #include <unistd.h>
 #endif
+
 #include "server.h"
 #include "process.h"
+
+#ifndef mmhh
+#define mmhh
 
 #define SOURCE_NETWORK  0
 #define SOURCE_FILE     1

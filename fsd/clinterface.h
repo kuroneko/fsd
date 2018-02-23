@@ -1,11 +1,13 @@
-#ifndef CLINTERFACEHH
-#define CLINTERFACEHH
+#include <ctime>
 
-#include <time.h>
 #include "interface.h"
 #include "user.h"
 #include "client.h"
 #include "wprofile.h"
+
+#ifndef CLINTERFACEHH
+#define CLINTERFACEHH
+
 class clinterface:public tcpinterface
 {
    time_t prevwinddelta;

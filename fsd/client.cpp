@@ -1,15 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifndef WIN32
 	#include <unistd.h>
 #endif
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
+
 #include "client.h"
 #include "cluser.h"
 #include "fsd.h"
 #include "support.h"
 #include "global.h"
+
 client *rootclient=NULL;
 
 client::client(char *i, server *where, char *cs, int t, int reqrating,

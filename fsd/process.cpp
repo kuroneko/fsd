@@ -1,12 +1,13 @@
-#include "process.h"
-#include "global.h"
-#include "server.h"
 #ifndef WIN32
 	#include <unistd.h>
 #endif
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+#include "process.h"
+#include "global.h"
+#include "server.h"
 
 int process::calcmasks(fd_set *, fd_set *) { return 0; }
 int process::run() { return 0; }

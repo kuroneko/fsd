@@ -1,12 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <signal.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <csignal>
 #ifndef WIN32
 	#include <unistd.h>
 	#include <syslog.h>
 	#include <sys/types.h>
 #endif
+
 #include "support.h"
 #include "fsd.h"
 #include "fsdpaths.h"

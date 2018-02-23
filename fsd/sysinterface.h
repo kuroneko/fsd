@@ -1,8 +1,9 @@
+#include "interface.h"
+#include "wprofile.h"
+
 #ifndef SYSINTERFACEHH
 #define SYSINTERFACEHH
 
-#include "interface.h"
-#include "wprofile.h"
 class sysinterface:public tcpinterface
 {
    public:

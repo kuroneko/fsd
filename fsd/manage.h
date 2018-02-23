@@ -1,7 +1,7 @@
+#include <ctime>
+
 #ifndef MANAGEHH
 #define MANAGEHH
-
-#include <time.h>
 
 #define ATT_INT         1
 #define ATT_FLOAT       2

@@ -1,7 +1,9 @@
+#include <ctime>
+
+#include "server.h"
+
 #ifndef CLIENTHH
 #define CLIENTHH
-#include "server.h"
-#include <time.h>
 
 #define CLIENT_PILOT 1
 #define CLIENT_ATC   2

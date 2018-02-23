@@ -1,10 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
 #include "certificate.h"
 #include "global.h"
 
-char *certlevels[]=
+const char *certlevels[]=
 {
    "SUSPENDED", "OBSPILOT", "STUDENT1", "STUDENT2", "STUDENT3",
    "CONTROLLER1", "CONTROLLER2", "CONTROLLER3", "INSTRUCTOR1",

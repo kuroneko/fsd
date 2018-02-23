@@ -1,11 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifndef WIN32
 	#include <unistd.h>
-	#include <sys/time.h>
 #endif
-#include <time.h>
-#include <string.h>
+#include <ctime>
+#include <cstring>
+
 #include "interface.h"
 #include "clinterface.h"
 #include "global.h"

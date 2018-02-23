@@ -1,10 +1,9 @@
-#include <stdio.h>
-//#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
 #include <sys/stat.h>
-//#include <sys/types.h>
+
 #include "manage.h"
 #include "config.h"
 #include "support.h"

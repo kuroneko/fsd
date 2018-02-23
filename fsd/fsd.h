@@ -6,7 +6,7 @@
 #include "interface.h"
 #include "process.h"
 #include "config.h"
-#include <time.h>
+#include <ctime>
 
 class fsd
 {

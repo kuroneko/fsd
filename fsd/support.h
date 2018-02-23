@@ -1,12 +1,13 @@
+#include <sys/types.h>
+#ifdef WIN32
+#include <winsock2.h>
+#else
+#include <sys/socket.h>
+#endif
+
 #ifndef SUPPORTH
 #define SUPPORTH
 
-#include <sys/types.h>
-#ifdef WIN32
-	#include <winsock2.h>
-#else
-	#include <sys/socket.h>
-#endif
 /* Levels for logging, standard SYSLOG numbers are used here */
 
 #define MAXLOG       50
@@ -32,7 +33,7 @@ void setconfigfile(char *name);
 int findsection(char *section);
 int finditem(char *what, char *buf);
 char *configgets(char *s, int size);
-void dolog(int level, char *, ...);
+void dolog(int level, const char *, ...);
 void addfile(char *, char *, ...);
 int breakpacket(char *, char **, int);
 int breakargs(char *, char **, int);

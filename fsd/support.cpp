@@ -1,9 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
-#include <time.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cstdarg>
+#include <ctime>
+#include <cctype>
 #ifdef WIN32
 	#include <winsock2.h>
 #else
@@ -13,9 +13,10 @@
 	#include <sys/types.h>
 	#include <netinet/in.h>
 #endif
-#include <limits.h>
-#include <math.h>
-#include <signal.h>
+#include <climits>
+#include <cmath>
+#include <csignal>
+
 #include "support.h"
 #include "global.h"
 #include "server.h"
@@ -46,7 +47,7 @@ void addfile(char *name, char *string,...)
    fclose(logfile);
 }
 
-void dolog(int level, char *string,...)
+void dolog(int level, const char *string, ...)
 {
    char buf[1000], buf2[1200];
    long secs=time(NULL);

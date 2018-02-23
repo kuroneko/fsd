@@ -1,12 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifndef WIN32
 	#include <unistd.h>
-	#include <sys/time.h>
 #endif
-#include <time.h>
-#include <string.h>
-#include <ctype.h>
+#include <ctime>
+#include <cstring>
+#include <cctype>
+
 #include "interface.h"
 #include "global.h"
 #include "support.h"
@@ -20,7 +20,7 @@
 
 /* The server user class */
 
-char *cmdnames[]=
+const char *cmdnames[]=
 {
    "NOTIFY",
    "REQMETAR",

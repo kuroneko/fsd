@@ -1,8 +1,9 @@
+#include <ctime>
+
+#include "interface.h"
+
 #ifndef SERVERHH
 #define SERVERHH
-
-#include <time.h>
-#include "interface.h"
 
 #define SERVER_METAR  1
 #define SERVER_SILENT 2

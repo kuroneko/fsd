@@ -1,10 +1,10 @@
-#ifndef USERHH
-#define USERHH
 #ifdef WIN32
-	#include <winsock2.h>
+#include <winsock2.h>
 #endif
 #include <sys/types.h>
 
+#ifndef USERHH
+#define USERHH
 
 class tcpinterface;
 class absuser

@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifdef WIN32
 	#include <winsock2.h>
 #else
@@ -9,9 +9,9 @@
 	#include <sys/time.h>
 	#include <netinet/in.h>
 #endif
-#include <string.h>
-#include <time.h>
-#include <errno.h>
+#include <cstring>
+#include <ctime>
+#include <cerrno>
 #include <sys/stat.h>
 #include "mm.h"
 #include "fsd.h"

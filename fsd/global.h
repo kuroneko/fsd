@@ -1,10 +1,10 @@
+#include <cmath>
+
+#include "manage.h"
+#include "fsdpaths.h"
+
 #ifndef GLOBALHH
 #define GLOBALHH
-
-/* #include "debug/malloc.h"    */
-#include "manage.h"
-//#include "libdbms.h"
-#include "fsdpaths.h"
 
 #ifdef WIN32
 	#define STRCASECMP(a,b)	_stricmp(a,b)
@@ -64,7 +64,5 @@
 #define LEV_SUPERVISOR          11
 #define LEV_ADMINISTRATOR       12
 #define LEV_MAX                 12
-
-#define M_PI 3.14159265
 
 #endif

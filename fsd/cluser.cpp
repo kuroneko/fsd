@@ -1,10 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #ifndef WIN32
 	#include <unistd.h>
 #endif
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
+
 #include "global.h"
 #include "cluser.h"
 #include "support.h"
@@ -15,7 +16,7 @@
 #include "fsdpaths.h"
 
 /* The client communication command names */
-char *clcmdnames[]=
+const char *clcmdnames[]=
 {
    "#AA",
    "#DA",
@@ -48,7 +49,7 @@ char *clcmdnames[]=
    NULL
 };
 
-char *errstr[]=
+const char *errstr[]=
 {
    "No error",
    "Callsign in use",

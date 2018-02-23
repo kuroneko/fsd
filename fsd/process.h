@@ -1,12 +1,13 @@
+#ifndef WIN32
+  #include <sys/time.h>
+  #include <sys/types.h>
+  #include <unistd.h>
+#else
+  #include <winsock2.h>
+#endif
+
 #ifndef PROCESSHH
 #define PROCESSHH
-#ifndef WIN32
-	#include <sys/time.h>
-	#include <sys/types.h>
-	#include <unistd.h>
-#else
-	#include <winsock2.h>
-#endif
 
 class pman;
 class process
