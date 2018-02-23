@@ -6,9 +6,9 @@ This repository is derived from the last known public copy of
 Marty Bochane's FSD 2 source code.
 
 It originated from a zip file 'fsd1110.zip', which bears indications it may
-have come from the FSFDT team.  It is almost identical to contents of the 
-fsd-ubuntu-120413.tar.bz2 distribution still available from the Apollo3
-flight simulator site.
+have been "FSFDT Windows FSD Beta from FSD V3.000 draft 9".
+It is almost identical to contents of the fsd-ubuntu-120413.tar.bz2 distribution
+still available from the Apollo3 flight simulator site.
 
 ## License
 
