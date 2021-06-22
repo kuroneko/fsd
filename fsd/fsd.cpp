@@ -4,6 +4,8 @@
 #include <cctype>
 #ifndef WIN32
 	#include <unistd.h>
+#else
+	#pragma comment(lib, "ws2_32.lib")
 #endif
 #include <sys/stat.h>
 
