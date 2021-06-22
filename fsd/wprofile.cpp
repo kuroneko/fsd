@@ -1,7 +1,13 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-#include <cmath>
+
+#ifdef WIN32
+	#define _USE_MATH_DEFINES
+	#include <math.h>
+#else
+	#include <cmath>
+#endif
 
 #include "wprofile.h"
 #include "support.h"

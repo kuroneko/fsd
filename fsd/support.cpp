@@ -2,11 +2,13 @@
 #include <cstdlib>
 #include <cstring>
 #include <cstdarg>
-#include <ctime>
 #include <cctype>
 #ifdef WIN32
 	#include <winsock2.h>
+	#define _USE_MATH_DEFINES
+	#include <math.h>
 #else
+	#include <ctime>
 	#include <netdb.h>
 	#include <unistd.h>
 	#include <sys/time.h>
@@ -50,7 +52,7 @@ void addfile(char *name, char *string,...)
 void dolog(int level, const char *string, ...)
 {
    char buf[1000], buf2[1200];
-   long secs=time(NULL);
+   time_t secs=time(NULL);
    struct tm *loctime;
    static int firsttime=1;
    FILE *logfile=fopen(LOGFILE,"a");
