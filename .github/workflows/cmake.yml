@@ -29,6 +29,6 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: |
-            cd ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            cd ${{github.workspace}}/build
             make
       
