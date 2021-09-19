@@ -32,10 +32,15 @@ jobs:
             cd ${{github.workspace}}/build
             make
             
+    - name: MV
+      run: | 
+       cd ${{github.workspace}}/build
+       mv fsd ${{github.workspace}}/unix/fsd
+      
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v2
       with:
           name: fsd
-          path: ${{github.workspace}}/build/fsd
+          path: ${{github.workspace}}/unix/
           retention-days: 5
       
